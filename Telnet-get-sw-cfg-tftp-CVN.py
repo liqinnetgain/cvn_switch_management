@@ -11,7 +11,7 @@ def find_hostname(config):
 def host_is_up(ipv4):
 #Check ping to host, if host is up response will be 0
 	print("---------------------------------------")
-	print("Check the availability of device %s" %ipv4)
+	print(("Check the availability of device %s" %ipv4))
 	response = os.system("ping -n 2 " + ipv4)
 	return response == 0
 
@@ -27,7 +27,7 @@ def get_config(tftp_server,ip,username,password,hostname):
 		READ_TIMEOUT = 5
 		#Logging into device (logging in to intermediate device (Fortigate) first)
 		print("---------------------------------------")
-		print("Started logging into Switch %s" % ip)
+		print(("Started logging into Switch %s" % ip))
 		connection = telnetlib.Telnet(ip, TELNET_PORT, TELNET_TIMEOUT)
 		time.sleep(3)
 		#Entering global config mode
@@ -46,7 +46,7 @@ def get_config(tftp_server,ip,username,password,hostname):
 		connection.write("\n".encode('ascii'))
 		time.sleep(3)
 		output = connection.read_very_eager()
-		print("Saved configuration file of device %s" % hostname)
+		print(("Saved configuration file of device %s" % hostname))
 		print("===============================================================================")
 		connection.write("exit\n".encode('ascii'))
 		time.sleep(2) 
@@ -69,7 +69,7 @@ selected_switch_file.seek(0)
 tftp_server = selected_switch_file.readline()
 tftp_server = tftp_server.rstrip("\n")
 tftp_server = tftp_server.rstrip(" ")
-print("TFTP Server is %s \n" % tftp_server)
+print(("TFTP Server is %s \n" % tftp_server))
 
 for each_line in selected_switch_file.readlines():
 	temp = each_line.split(" ")
@@ -79,14 +79,14 @@ for each_line in selected_switch_file.readlines():
 	hostname = temp[3].rstrip("\n")        
   
 	print("===============================================================================")
-	print('Device\'s IP is', ipv4)
-	print('Username is', username)
-	print('Hostname is', hostname)
+	print(('Device\'s IP is', ipv4))
+	print(('Username is', username))
+	print(('Hostname is', hostname))
 
 	if check_ipv4_validity(ipv4) and host_is_up(ipv4):
 	   get_config(tftp_server,ipv4,username,password,hostname) 
 	else:
-		print("This ip address %s is invalid or not available" % ipv4)
+		print(("This ip address %s is invalid or not available" % ipv4))
 		print("===============================================================================")
 
 #Closing the switch file

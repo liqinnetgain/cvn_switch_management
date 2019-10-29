@@ -11,7 +11,7 @@ def find_hostname(config):
 def host_is_up(ipv4):
 #Check ping to host, if host is up response will be 0
 	print("---------------------------------------")
-	print("Check the availability of device %s" %ipv4)
+	print(("Check the availability of device %s" %ipv4))
 	response = os.system("ping -n 2 " + ipv4)
 	return response == 0
 
@@ -37,7 +37,7 @@ selected_switch_file.seek(0)
 tftp_server = selected_switch_file.readline()
 tftp_server = tftp_server.rstrip("\n")
 tftp_server = tftp_server.rstrip(" ")
-print("TFTP Server is %s" % tftp_server)
+print(("TFTP Server is %s" % tftp_server))
 
 #read intermediate device 
 temp = selected_switch_file.readline().split(" ")
@@ -47,7 +47,7 @@ intermediate_username = temp[1]
 intermediate_password = temp[2].rstrip("\n")
 
 print("=======================================")
-print('intermediate switch\'s IP is', intermediate_ipv4)
+print(('intermediate switch\'s IP is', intermediate_ipv4))
 
 #Logging into device (logging in to intermediate device first)
 TELNET_PORT = 23
@@ -62,7 +62,7 @@ for each_line in selected_switch_file.readlines():
 	hostname = temp[3].rstrip("\n")        
 
 	print("---------------------------------------")
-	print("Started logging into intermediate switch %s" % intermediate_ipv4)
+	print(("Started logging into intermediate switch %s" % intermediate_ipv4))
 	connection = telnetlib.Telnet(intermediate_ipv4, TELNET_PORT, TELNET_TIMEOUT)
 	time.sleep(3)
 	#Entering global config mode
@@ -74,13 +74,13 @@ for each_line in selected_switch_file.readlines():
 	time.sleep(3)
   
 	print("===============================================================================")
-	print('Start working with device\'s IP ', ipv4)
-	print('Username is', username)
-	print('Hostname is', hostname)
+	print(('Start working with device\'s IP ', ipv4))
+	print(('Username is', username))
+	print(('Hostname is', hostname))
 
 	if check_ipv4_validity(ipv4) and host_is_up(ipv4):
 	   print("---------------------------------------")
-	   print("Started logging into Switch %s" % ipv4)
+	   print(("Started logging into Switch %s" % ipv4))
 	   connection.write(("telnet " + ipv4 + "\n").encode('ascii'))
 	   time.sleep(3)
 	   connection.write((username + "\n").encode('ascii'))
@@ -99,12 +99,12 @@ for each_line in selected_switch_file.readlines():
 	   time.sleep(3)
 	   connection.write("exit\n".encode('ascii'))
 	   connection.write("exit\n".encode('ascii'))
-	   print("Saved configuration file of device %s" % hostname)
+	   print(("Saved configuration file of device %s" % hostname))
 	   print("===============================================================================")
 	   #output = connection.read_very_eager()
 	   #print(output)
 	else:
-		print("This ip address %s is invalid or not available" % ipv4)
+		print(("This ip address %s is invalid or not available" % ipv4))
 		print("===============================================================================")
 
 	connection.close()

@@ -1,0 +1,2 @@
+mdu 10.11.104.2 root mduadmin
+mdu1 10.11.104.2 root mduadmin

@@ -1,0 +1,155 @@
+
+>>User name:root
+>>User password:
+
+
+  Huawei Integrated Access Software (MA5626).
+  Copyright(C) Huawei Technologies Co., Ltd. 2002-2013. All rights reserved.
+
+  -----------------------------------------------------------------------------
+  User last login information:
+  -----------------------------------------------------------------------------
+  Access Type : Telnet 
+  IP-Address  : 10.11.104.10
+  Login  Time : 2019-06-02 04:38:27+08:00
+  Logout Time : 2019-06-02 04:38:43+08:00
+  -----------------------------------------------------------------------------
+  ----------------------------------------------------------------------------- 
+  All user fail login information: 
+  -----------------------------------------------------------------------------
+  Access Type IP-Address           Time                          Login Times
+  -----------------------------------------------------------------------------
+  Telnet      10.11.104.10         2019-06-02 04:14:28+08:00              18
+  -----------------------------------------------------------------------------
+
+  User root has used a default password. Change the password in time.
+
+mdu>enable
+
+mdu#config
+
+mdu(config)#mmi-mode original-output
+
+mdu(config)#quit
+
+mdu#display current-configuration
+{ <cr>|port<K>|section<K>|service-port<K>|simple<K>||<K> }:
+
+  Command:
+          display current-configuration 
+[MA5626V800R312: 2300]
+#
+[global-config]
+  <global-config>
+ sysname mdu
+ terminal user name buildrun_new_password huawei *[AYXK#1R`G9FVI51X7,]UUU]!* 0 2019:05:31:00:12:44 2019:05:31:00:12:44 root 2 "-----"
+ traffic table ip index 10 name "ip-traffic-table_10" cir 1024000 cbs 1024000 pir 1024000 pbs 1024000 color-mode color-blind priority 0 priority-policy local-setting
+#
+[device-config]
+  <device-config>
+ port port-index 0/0/1 port-type GPON-PORT
+#
+[public-config]
+  <public-config>
+ snmp-agent local-engineid 800007DB03249EABCE8AB707
+ snmp-agent community read %[<5GDF"@%]]!EOIQP9HG6Q!!B#A8&)VAB']]F;U$19'2_1!!% 
+ snmp-agent community write %(6T@B>PL#N;EART8/>V$a1!!B#A8&)VAB']]F;U$19'2_1!!% 
+ snmp-agent target-host trap-hostname 1MTU.192.168.64.10 address 192.168.64.10 udp-port 162 trap-paramsname 1MTU.192.168.64.10
+ snmp-agent target-host trap-paramsname 1MTU.192.168.64.10 v1 securityname %[<5GDF"@%]]!EOIQP9HG6Q!!B#A8&)VAB']]F;U$19'2_1!!% 
+ snmp-agent trap enable standard
+#
+[vlan-config]
+  <vlan-config>
+ vlan 12 to 13 smart
+ vlan 21 smart
+ vlan 40 smart
+ vlan 51 smart
+ vlan 2022 smart
+ protocol-8021p-pri 5 vlan 13
+ port vlan 12 to 13 0/0 1
+ port vlan 21 0/0 1
+ port vlan 40 0/0 1
+ port vlan 51 0/0 1
+ port vlan 2022 0/0 1
+#
+[gponnni]
+  <gponnni-0/0/1>
+ interface gponnni 0/0/1
+ password "%5L3_.^M^.9I\5<V@WN#JI1!!B#A8&)VAB']]F;U$19'2_1!!B#A8&)VAB']]F;U$19'2_1!!%"
+ loid "%VL*&O__.3U3;RaK'0`"NPQ!!,DWUN(I=,'UZ_`@1RI<=WQ!!%"
+ checkcode "%L9;7+FT2-[LX3NU/Va@a]Q!!%"
+#
+[bbs-config]
+  <bbs-config>
+ service-port 0 vlan 2022 eth 0/1/1 multi-service user-vlan 2022 inbound traffic-table index 10 outbound traffic-table index 10
+ service-port 1 vlan 21 eth 0/1/1 multi-service user-vlan 21 inbound traffic-table index 10 outbound traffic-table index 10
+ service-port 2 vlan 12 eth 0/1/1 multi-service user-vlan untagged inbound traffic-table index 10 outbound traffic-table index 10
+ service-port 4 vlan 51 eth 0/1/3 multi-service user-vlan untagged inbound traffic-table index 10 outbound traffic-table index 10
+ service-port 5 vlan 40 eth 0/1/4 multi-service user-vlan untagged inbound traffic-table index 10 outbound traffic-table index 10
+#
+[btv-config]
+  <btv-config>
+ btv
+ igmp user add 0 service-port 4 max-program 32
+ multicast-vlan 51
+  igmp version v2
+  igmp match mode disable
+  igmp multicast-vlan member 0
+  igmp uplink-port 0/0/1 
+#
+[prevlanif]
+  <prevlanif>
+ interface vlanif12
+ interface vlanif13
+ interface vlanif21
+ interface vlanif40
+ interface vlanif51
+ interface vlanif2022
+#
+[vlanif]
+  <vlanif12>
+interface vlanif12
+#
+  <vlanif13>
+interface vlanif13
+ ip address 192.168.65.20 255.255.248.0
+#
+  <vlanif21>
+interface vlanif21
+#
+  <vlanif40>
+interface vlanif40
+#
+  <vlanif51>
+interface vlanif51
+#
+  <vlanif2022>
+interface vlanif2022
+#
+[meth]
+  <meth0>
+interface meth0
+ ip address 10.11.104.2 255.255.255.0
+#
+[null]
+  <null0>
+interface null0
+#
+[aaa]
+  <aaa>
+aaa 
+ authentication-scheme "default"
+ #
+ authorization-scheme "default"
+ #
+ accounting-scheme "default"
+ #
+ domain "default"
+ #
+[post-system]
+  <post-system>
+ ssh user huawei authentication-type RSA
+#
+return
+
+mdu#
